@@ -1,15 +1,9 @@
 import React, { Component } from "react";
-
-// import { render } from "react-dom";
 import Gallery from "react-photo-gallery";
-// import Lightbox from "react-images";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-
 import { reveal as Menu } from "react-burger-menu";
-
 import styled from "styled-components";
-
 import "./App.css";
 
 import { Loader } from "./Loader";
@@ -47,12 +41,9 @@ class App extends Component {
     this.state = {
       images: [],
       currentImage: 0,
-      opacity: 1
+      opacity: 1,
+      menuOpen: false
     };
-    this.closeLightbox = this.closeLightbox.bind(this);
-    this.openLightbox = this.openLightbox.bind(this);
-    this.gotoNext = this.gotoNext.bind(this);
-    this.gotoPrevious = this.gotoPrevious.bind(this);
   }
 
   _isMounted = false;
@@ -74,9 +65,18 @@ class App extends Component {
   }
 
   componentWillMount() {
+    const tag = "storyboards";
     const url =
-      "https://api.flickr.com/services/rest/?method=flickr.photos.search&nojsoncallback=1&api_key=f29dc69a4a6889fb21115bc54e8f432b&user_id=willtubby&sort=date-taken-desc&tags=tubbycreativesite&tag_mode=all&extras=tags,date_upload,date_taken,media,url_n,url_l,url_z,url_o&per_page=300&page=1&format=json&nojsoncallback=1";
-
+      "https://api.flickr.com/services/rest/?method=flickr.photos.search&nojsoncallback=1" +
+      "&api_key=f29dc69a4a6889fb21115bc54e8f432b" +
+      "&user_id=willtubby" +
+      "&sort=date-taken-desc" +
+      "&tags=" +
+      tag +
+      "&tag_mode=all" +
+      "&extras=tags,date_upload,date_taken,media,url_n,url_l,url_z,url_o&per_page=300&page=1" +
+      "&format=json" +
+      "&nojsoncallback=1";
     fetch(url)
       .then(res => res.json())
       .then(result => {
@@ -94,35 +94,54 @@ class App extends Component {
         // }
       });
   }
-  openLightbox(event, obj) {
+  openLightbox = (event, obj) => {
     this.setState({
       currentImage: obj.index,
       lightboxIsOpen: true
     });
-  }
-  closeLightbox() {
+  };
+  closeLightbox = () => {
     this.setState({
       currentImage: 0,
       lightboxIsOpen: false
     });
-  }
-  gotoPrevious() {
+  };
+  gotoPrevious = () => {
     this.setState({
       currentImage: this.state.currentImage - 1
     });
-  }
-  gotoNext() {
+  };
+  gotoNext = () => {
     this.setState({
       currentImage: this.state.currentImage + 1
     });
+  };
+  // This can be used to close the menu, e.g. when a user clicks a menu item
+  closeMenu = () => {
+    console.log("closing the menu");
+    this.setState({ menuOpen: false });
+  };
+
+  handleStateChange(state) {
+    this.setState({ menuOpen: state.isOpen });
   }
   render() {
     return (
       <Container>
         <Header>
-          <Menu pageWrapId={"pagewrap"}>
+          <Menu
+            pageWrapId={"pagewrap"}
+            isOpen={this.state.menuOpen}
+            onStateChange={state => this.handleStateChange(state)}
+          >
             <a id="home" className="menu-item" href="/">
-              Home
+              Will Tubby
+              <br />
+              Visualiser
+              <br />
+              Available for work
+              <br />
+              07989 742643
             </a>
             <a id="about" className="menu-item" href="/about">
               About
@@ -167,6 +186,7 @@ class App extends Component {
                   ? this.state.images[this.state.currentImage - 1].hires
                   : this.state.images[0].src
               }
+              onAfterOpen={this.closeMenu}
               onCloseRequest={this.closeLightbox}
               onMovePrevRequest={this.gotoPrevious}
               onMoveNextRequest={this.gotoNext}

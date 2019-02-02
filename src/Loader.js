@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { isContainer } from "postcss-selector-parser";
 
 export const Loader = () => (
   <Container>
