@@ -15,25 +15,25 @@ const Container = styled.div`
 // http://tubbycreative.com/Tubbytext/tubbycreative.gif
 const Header = styled.div`
   position: fixed;
-  top: 0;
+  top: 0px;
   right: 0;
   z-index: 1000;
   background-size: 50%;
   opacity: 0.7;
-  color: white;
   width: 100%;
   height: 110px;
-  padding: 0;
   margin: 0;
-  vertical-align: middle;
   text-align: center;
   height: 6vw;
-  padding-top: 10px;
-  opacity: 1;
 `;
-const TubbyCreative = styled.img`
-  //max-height: 40px;
-  width: 60%;
+const TitleContainer = styled.div`
+  // padding-top: 10px;
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+`;
+const TitleImage = styled.img`
+  width: 70%;
 `;
 class App extends Component {
   constructor(props) {
@@ -150,12 +150,14 @@ class App extends Component {
               Contact
             </a>
           </Menu>
-          <TubbyCreative
-            style={{ opacity: this.state.opacity }}
-            src={
-              "http://tubbycreative.com/tubbycreative/tubbycreativeblack.png"
-            }
-          />
+          <TitleContainer>
+            <TitleImage
+              style={{ opacity: this.state.opacity }}
+              src={
+                "http://tubbycreative.com/tubbycreative/tubbycreativeblack.png"
+              }
+            />
+          </TitleContainer>
         </Header>
         <div id="pagewrap">
           {!this._isMounted && <Loader />}
