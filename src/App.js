@@ -12,6 +12,8 @@ import styled from "styled-components";
 
 import "./App.css";
 
+import { Loader } from "./Loader";
+
 const Container = styled.div`
   display: relative;
   flex-direction: column;
@@ -119,7 +121,7 @@ class App extends Component {
       <Container>
         <Header>
           <Menu pageWrapId={"pagewrap"}>
-            {/* <a id="home" className="menu-item" href="/">
+            <a id="home" className="menu-item" href="/">
               Home
             </a>
             <a id="about" className="menu-item" href="/about">
@@ -127,7 +129,7 @@ class App extends Component {
             </a>
             <a id="contact" className="menu-item" href="/contact">
               Contact
-            </a> */}
+            </a>
           </Menu>
           <TubbyCreative
             style={{ opacity: this.state.opacity }}
@@ -137,6 +139,7 @@ class App extends Component {
           />
         </Header>
         <div id="pagewrap">
+          {!this._isMounted && <Loader />}
           {this._isMounted && (
             <Gallery
               photos={this.state.images}
