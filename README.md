@@ -1,4 +1,4 @@
-Personal website for Will Tubby, artist
+Personal website for Will Tubby, Visual Designer
 
 Images are pulled from Flickr via their API
 
