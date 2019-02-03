@@ -94,6 +94,19 @@ class App extends Component {
         // }
       });
   }
+
+  /* Open */
+  openNav = () => {
+    console.log("open contact dropdown");
+    document.getElementById("myNav").style.display = "block";
+  };
+
+  /* Close */
+  closeNav = () => {
+    console.log("CLOSE contact dropdown");
+    document.getElementById("myNav").style.display = "none";
+  };
+
   openLightbox = (event, obj) => {
     this.setState({
       currentImage: obj.index,
@@ -128,6 +141,19 @@ class App extends Component {
   render() {
     return (
       <Container>
+        <div id="myNav" class="overlay">
+          <a href="javascript:void(0)" class="closebtn" onClick={this.closeNav}>
+            &times;
+          </a>
+
+          <div class="overlay-content">
+            Visualiser
+            <br />
+            Bass Guitarist
+            <br />
+            Call Will on 07989742643
+          </div>
+        </div>
         <Header>
           <Menu
             right
@@ -154,7 +180,7 @@ class App extends Component {
             >
               Video
             </a>
-            <a id="contact" className="menu-item" href="/contact">
+            <a id="contact" className="menu-item" onClick={this.openNav}>
               Contact
             </a>
           </Menu>
