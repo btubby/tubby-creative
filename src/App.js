@@ -134,17 +134,14 @@ class App extends Component {
             isOpen={this.state.menuOpen}
             onStateChange={state => this.handleStateChange(state)}
           >
-            <a id="home" className="menu-item" href="/">
-              Will Tubby
-              <br />
-              Visualiser
-              <br />
-              Available for work
-              <br />
-              07989 742643
+            <a id="about" className="menu-item" href="/about">
+              Image
             </a>
             <a id="about" className="menu-item" href="/about">
-              About
+              Audio
+            </a>
+            <a id="about" className="menu-item" href="/about">
+              Video
             </a>
             <a id="contact" className="menu-item" href="/contact">
               Contact
