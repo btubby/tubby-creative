@@ -134,13 +134,23 @@ class App extends Component {
             isOpen={this.state.menuOpen}
             onStateChange={state => this.handleStateChange(state)}
           >
-            <a id="about" className="menu-item" href="/about">
+            <a id="about" className="menu-item" href="#">
               Image
             </a>
-            <a id="about" className="menu-item" href="/about">
+            <a
+              id="about"
+              className="menu-item"
+              target="_"
+              href="https://soundcloud.com/willtubby"
+            >
               Audio
             </a>
-            <a id="about" className="menu-item" href="/about">
+            <a
+              id="about"
+              className="menu-item"
+              target="_"
+              href="https://www.youtube.com/user/willtubby/videos"
+            >
               Video
             </a>
             <a id="contact" className="menu-item" href="/contact">
