@@ -130,6 +130,7 @@ class App extends Component {
       <Container>
         <Header>
           <Menu
+            right
             pageWrapId={"pagewrap"}
             isOpen={this.state.menuOpen}
             onStateChange={state => this.handleStateChange(state)}
