@@ -18,6 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "deploy_will": "cd build; zip -r  /tmp/site.zip *;scp site.zip user_1081867768@ssh.tubbycreative.com:/home/linweb37/t/tubbycreative.com-1081867769/user/htdocs",
     "deploy": "yarn build;firebase deploy"
   },
   "eslintConfig": {

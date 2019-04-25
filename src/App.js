@@ -29,7 +29,7 @@ const Header = styled.div`
 const TitleContainer = styled.div`
   // padding-top: 10px;
   @media only screen and (max-width: 600px) {
-    display: none;
+    // display: none;
   }
 `;
 const TitleImage = styled.img`
@@ -60,23 +60,22 @@ class App extends Component {
     }
   };
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.listenScrollEvent);
-  }
-
   componentWillMount() {
-    const tag = "storyboards";
+    //const tag = "storyboards";
     const url =
       "https://api.flickr.com/services/rest/?method=flickr.photos.search&nojsoncallback=1" +
-      "&api_key=f29dc69a4a6889fb21115bc54e8f432b" +
-      "&user_id=willtubby" +
+      // "&api_key=f29dc69a4a6889fb21115bc54e8f432b" +
+      // "&user_id=willtubby" +
+      "&api_key=52f7e77ccc225a2c6cda920bb6173fb5" +
+      "&user_id=tubbycreative" +
       "&sort=date-taken-desc" +
-      "&tags=" +
-      tag +
+      // "&tags=" +
+      // tag +
       "&tag_mode=all" +
       "&extras=tags,date_upload,date_taken,media,url_n,url_l,url_z,url_o&per_page=300&page=1" +
       "&format=json" +
       "&nojsoncallback=1";
+    console.log(url);
     fetch(url)
       .then(res => res.json())
       .then(result => {
@@ -95,13 +94,11 @@ class App extends Component {
       });
   }
 
-  /* Open */
   openNav = () => {
     console.log("open contact dropdown");
     document.getElementById("myNav").style.display = "block";
   };
 
-  /* Close */
   closeNav = () => {
     console.log("CLOSE contact dropdown");
     document.getElementById("myNav").style.display = "none";
@@ -138,6 +135,16 @@ class App extends Component {
   handleStateChange(state) {
     this.setState({ menuOpen: state.isOpen });
   }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.listenScrollEvent);
+    document
+      .getElementsByClassName("bm-menu")[0]
+      .addEventListener("click", function(event) {
+        console.log("menu clicked!");
+        // this.closeNav();
+      });
+  }
   render() {
     return (
       <Container>
@@ -152,6 +159,8 @@ class App extends Component {
             Bass Guitarist
             <br />
             Call Will on 07989742643
+            <br />
+            <a href="mailto:will@tubbycreative.com">EMAIL WILL</a>
           </div>
         </div>
         <Header>
