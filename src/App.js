@@ -53,11 +53,22 @@ class App extends Component {
   }
 
   listenScrollEvent = e => {
-    if (window.scrollY > 400) {
-      this.setState({ opacity: 0 });
-    } else {
-      this.setState({ opacity: 1 });
+    let opacity=1;
+   
+    if (window.scrollY > 100) {
+      opacity=0.9;
     }
+    if (window.scrollY > 200) {
+      opacity=0.7;
+    }
+    if (window.scrollY > 400) {
+      opacity=0.5;
+    }
+    if (window.scrollY > 600) {
+      opacity=0.3;
+    }
+    // console.log(`Y: ${window.scrollY} opacity: ${opacity}`)
+    this.setState({ opacity: opacity });
   };
 
   componentWillMount() {
