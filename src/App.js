@@ -3,38 +3,12 @@ import Gallery from "react-photo-gallery";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { reveal as Menu } from "react-burger-menu";
-import styled from "styled-components";
+
 import "./App.css";
 
 import { Loader } from "./Loader";
+import {Header, Container, TitleContainer, TitleImage} from './App.styles'
 
-const Container = styled.div`
-  display: relative;
-  flex-direction: column;
-`;
-// http://tubbycreative.com/Tubbytext/tubbycreative.gif
-const Header = styled.div`
-  position: fixed;
-  top: 0px;
-  right: 0;
-  z-index: 1000;
-  background-size: 50%;
-  opacity: 0.7;
-  width: 100%;
-  height: 110px;
-  margin: 0;
-  text-align: center;
-  height: 6vw;
-`;
-const TitleContainer = styled.div`
-  // padding-top: 10px;
-  @media only screen and (max-width: 600px) {
-    // display: none;
-  }
-`;
-const TitleImage = styled.img`
-  width: 70%;
-`;
 class App extends Component {
   constructor(props) {
     super(props);
