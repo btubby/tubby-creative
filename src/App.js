@@ -3,11 +3,9 @@ import Gallery from "react-photo-gallery";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { reveal as Menu } from "react-burger-menu";
-
-import "./App.css";
-
 import { Loader } from "./Loader";
 import {Header, Container, TitleContainer, TitleImage} from './App.styles'
+import "./App.css";
 
 class App extends Component {
   constructor(props) {

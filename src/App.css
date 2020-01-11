@@ -114,17 +114,17 @@
 }
 
 /* This positions the cross centrally in the button */
-.bm-cross-button > span {
+/* .bm-cross-button > span {
   top: 2px !important;
-  /* right: 60px !important; */
-}
+  right: 60px !important;
+} */
 
 /* This targets the actual elements that make up the cross */
-.bm-cross {
+/* .bm-cross {
   background: tomato;
   width: 10px !important;
   height: 40px !important;
-}
+} */
 
 /* General sidebar styles */
 .bm-menu {

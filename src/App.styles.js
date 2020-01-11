@@ -9,15 +9,17 @@ export const Header = styled.div`
   top: 0px;
   right: 0px;
   z-index: 1000;
-  background-size: 50%;
-  width: 100%;
+  /* background-size: 50%; */
+  /* width: 100%; */
   height: 110px;
-  margin: 0px;
+  /* margin: 0px; */
   text-align: center;
-  height: 6vw;
+  /* height: 6vw; */
+  border: 1px solid red;
+  padding-right:50px;
 `;
 export const TitleContainer = styled.div`
 `;
 export const TitleImage = styled.img`
-  width: 70%;
+  width: 80%;
 `;
