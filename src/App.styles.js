@@ -15,7 +15,6 @@ export const Header = styled.div`
   /* margin: 0px; */
   text-align: center;
   /* height: 6vw; */
-  border: 1px solid red;
   padding-right:50px;
 `;
 export const TitleContainer = styled.div`
