@@ -1,9 +1,11 @@
 Personal website for Will Tubby, Visual Designer
 
-This project uses;
+Dependencies;
 
 https://www.npmjs.com/package/react-photo-gallery
+
 https://www.npmjs.com/package/react-image-lightbox
+
 https://www.npmjs.com/package/react-burger-menu
 
 
