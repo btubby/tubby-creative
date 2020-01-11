@@ -2,11 +2,9 @@ Personal website for Will Tubby, Visual Designer
 
 Dependencies;
 
-https://www.npmjs.com/package/react-photo-gallery
-
-https://www.npmjs.com/package/react-image-lightbox
-
-https://www.npmjs.com/package/react-burger-menu
+- https://www.npmjs.com/package/react-photo-gallery
+- https://www.npmjs.com/package/react-image-lightbox
+- https://www.npmjs.com/package/react-burger-menu
 
 
 Images are pulled from Flickr
