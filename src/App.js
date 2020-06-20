@@ -1,47 +1,48 @@
-import React, { Component } from "react";
-import Gallery from "react-photo-gallery";
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
-import { reveal as Menu } from "react-burger-menu";
-import { Loader } from "./Loader";
-import {Header, Container, TitleContainer, TitleImage} from './App.styles'
-import "./App.css";
+import React, { Component } from "react"
+import Gallery from "react-photo-gallery"
+import Lightbox from "react-image-lightbox"
+import "react-image-lightbox/style.css"
+import { reveal as Menu } from "react-burger-menu"
+import { Loader } from "./Loader"
+import { Header, Container, TitleContainer, TitleImage } from "./App.styles"
+import "./App.css"
+import titleImage from "./tubbycreativeblack.png"
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       images: [],
       currentImage: 0,
       opacity: 1,
-      menuOpen: false
-    };
+      menuOpen: false,
+    }
   }
 
-  _isMounted = false;
+  _isMounted = false
 
   componentWillUnmount() {
-    this._isMounted = false;
+    this._isMounted = false
   }
 
-  listenScrollEvent = e => {
-    let opacity=1;
-   
+  listenScrollEvent = (e) => {
+    let opacity = 1
+
     if (window.scrollY > 100) {
-      opacity=0.9;
+      opacity = 0.9
     }
     if (window.scrollY > 200) {
-      opacity=0.7;
+      opacity = 0.7
     }
     if (window.scrollY > 400) {
-      opacity=0.5;
+      opacity = 0.5
     }
     if (window.scrollY > 600) {
-      opacity=0.3;
+      opacity = 0.3
     }
     // console.log(`Y: ${window.scrollY} opacity: ${opacity}`)
-    this.setState({ opacity: opacity });
-  };
+    this.setState({ opacity: opacity })
+  }
 
   componentWillMount() {
     //const tag = "storyboards";
@@ -57,93 +58,97 @@ class App extends Component {
       "&tag_mode=all" +
       "&extras=tags,date_upload,date_taken,media,url_n,url_l,url_z,url_o&per_page=300&page=1" +
       "&format=json" +
-      "&nojsoncallback=1";
-    console.log(url);
+      "&nojsoncallback=1"
+    console.log(url)
     fetch(url)
-      .then(res => res.json())
-      .then(result => {
-        console.log(result);
-        this._isMounted = true;
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result)
+        this._isMounted = true
         // if (this._isMounted) {
         this.setState({
-          images: result.photos.photo.map(image => ({
+          images: result.photos.photo.map((image) => ({
             src: image.url_z,
             hires: image.url_l,
             height: parseInt(image.height_z),
-            width: parseInt(image.width_z)
-          }))
-        });
+            width: parseInt(image.width_z),
+          })),
+        })
         // }
-      });
+      })
   }
 
   openNav = () => {
-    console.log("open contact dropdown");
-    document.getElementById("myNav").style.display = "block";
-  };
+    console.log("open contact dropdown")
+    document.getElementById("myNav").style.display = "block"
+  }
 
   closeNav = () => {
-    console.log("CLOSE contact dropdown");
-    document.getElementById("myNav").style.display = "none";
-  };
+    console.log("CLOSE contact dropdown")
+    document.getElementById("myNav").style.display = "none"
+  }
 
   openLightbox = (event, obj) => {
     this.setState({
       currentImage: obj.index,
-      lightboxIsOpen: true
-    });
-  };
+      lightboxIsOpen: true,
+    })
+  }
   closeLightbox = () => {
     this.setState({
       currentImage: 0,
-      lightboxIsOpen: false
-    });
-  };
+      lightboxIsOpen: false,
+    })
+  }
   gotoPrevious = () => {
     this.setState({
-      currentImage: this.state.currentImage - 1
-    });
-  };
+      currentImage: this.state.currentImage - 1,
+    })
+  }
   gotoNext = () => {
     this.setState({
-      currentImage: this.state.currentImage + 1
-    });
-  };
+      currentImage: this.state.currentImage + 1,
+    })
+  }
   // This can be used to close the menu, e.g. when a user clicks a menu item
   closeMenu = () => {
-    console.log("closing the menu");
-    this.setState({ menuOpen: false });
-  };
+    console.log("closing the menu")
+    this.setState({ menuOpen: false })
+  }
 
   handleStateChange(state) {
-    this.setState({ menuOpen: state.isOpen });
+    this.setState({ menuOpen: state.isOpen })
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.listenScrollEvent);
+    window.addEventListener("scroll", this.listenScrollEvent)
     document
       .getElementsByClassName("bm-menu")[0]
       .addEventListener("click", function(event) {
-        console.log("menu clicked!");
+        console.log("menu clicked!")
         // this.closeNav();
-      });
+      })
   }
   render() {
     return (
       <Container>
-        <div id="myNav" class="overlay">
-          <a href="javascript:void(0)" class="closebtn" onClick={this.closeNav}>
+        <div id="myNav" className="overlay">
+          <a
+            href="javascript:void(0)"
+            className="closebtn"
+            onClick={this.closeNav}
+          >
             &times;
           </a>
 
-          <div class="overlay-content">
+          <div className="overlay-content">
             Visualiser
             <br />
             Bass Guitarist
             <br />
             Call Will on 07989742643
-            <br />
-            <a href="mailto:will@tubbycreative.com">EMAIL WILL</a>
+            {/* <br />
+            <a href="mailto:will@tubbycreative.com">EMAIL WILL</a> */}
           </div>
         </div>
         <Header>
@@ -151,7 +156,7 @@ class App extends Component {
             right
             pageWrapId={"pagewrap"}
             isOpen={this.state.menuOpen}
-            onStateChange={state => this.handleStateChange(state)}
+            onStateChange={(state) => this.handleStateChange(state)}
           >
             <a id="about" className="menu-item" href="#">
               Image
@@ -179,9 +184,7 @@ class App extends Component {
           <TitleContainer>
             <TitleImage
               style={{ opacity: this.state.opacity }}
-              src={
-                "http://tubbycreative.com/tubbycreative/tubbycreativeblack.png"
-              }
+              src={titleImage}
             />
           </TitleContainer>
         </Header>
@@ -230,9 +233,9 @@ class App extends Component {
           )}
         </div>
       </Container>
-    );
+    )
   }
   //END
 }
 
-export default App;
+export default App
