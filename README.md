@@ -5,12 +5,7 @@ Personal website for Will Tubby, Visual Designer
 
 ## Deployment
 
-run deploy_will
-on server;
-unzip into htdocs/tubbycreative/
-
-https://tubbycreative.firebaseapp.com/
-
+served from */htdocs* on the server (use *deploy_will* in poackage.json
 
 
 ## Dependencies
