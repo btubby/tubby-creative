@@ -6,7 +6,7 @@ Personal website for Will Tubby, Visual Designer
 ## Deployment
 
 served from */htdocs* on the server (use *deploy_will* in poackage.json)
-
+It does not use firebase for hosting.
 
 ## Dependencies
 
