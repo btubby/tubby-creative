@@ -1,53 +1,53 @@
-import React, { Component } from "react"
-import Gallery from "react-photo-gallery"
-import Lightbox from "react-image-lightbox"
-import "react-image-lightbox/style.css"
-import { reveal as Menu } from "react-burger-menu"
-import { Loader } from "./Loader"
-import { Header, Container, TitleContainer, TitleImage } from "./App.styles"
-import "./App.css"
-import titleImage from "./tubbycreativeblack.png"
+import React, { Component } from "react";
+import Gallery from "react-photo-gallery";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
+import { reveal as Menu } from "react-burger-menu";
+import { Loader } from "./Loader";
+import { Header, Container, TitleContainer, TitleImage } from "./App.styles";
+import "./App.css";
+import titleImage from "./tubbycreativeblack.png";
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       images: [],
       currentImage: 0,
       opacity: 1,
       menuOpen: false,
-    }
+    };
   }
 
-  _isMounted = false
+  _isMounted = false;
 
   componentWillUnmount() {
-    this._isMounted = false
+    this._isMounted = false;
   }
 
   listenScrollEvent = (e) => {
-    let opacity = 1
+    let opacity = 1;
 
     if (window.scrollY > 100) {
-      opacity = 0.9
+      opacity = 0.9;
     }
     if (window.scrollY > 200) {
-      opacity = 0.7
+      opacity = 0.7;
     }
     if (window.scrollY > 400) {
-      opacity = 0.5
+      opacity = 0.5;
     }
     if (window.scrollY > 600) {
-      opacity = 0.3
+      opacity = 0.3;
     }
-    // console.log(`Y: ${window.scrollY} opacity: ${opacity}`)
-    this.setState({ opacity: opacity })
-  }
+    // console.log(`Y: ${window.scrollY} opacity: ${opacity}`);
+    this.setState({ opacity: opacity });
+  };
 
   componentWillMount() {
     //const tag = "storyboards";
     const url =
-      "https://api.flickr.com/services/rest/?method=flickr.photos.search&nojsoncallback=1" +
+      "https://api.flickr.com/services/rest/?method=flickr.photos.search&" +
       // "&api_key=f29dc69a4a6889fb21115bc54e8f432b" +
       // "&user_id=willtubby" +
       "&api_key=52f7e77ccc225a2c6cda920bb6173fb5" +
@@ -58,76 +58,102 @@ class App extends Component {
       "&tag_mode=all" +
       "&extras=tags,date_upload,date_taken,media,url_n,url_l,url_z,url_o&per_page=300&page=1" +
       "&format=json" +
-      "&nojsoncallback=1"
-    console.log(url)
+      "&nojsoncallback=1";
+    console.log(url);
     fetch(url)
       .then((res) => res.json())
       .then((result) => {
-        console.log(result)
-        this._isMounted = true
+        console.log(result);
+        this._isMounted = true;
         // if (this._isMounted) {
         this.setState({
-          images: result.photos.photo.map((image) => ({
-            src: image.url_z,
-            hires: image.url_l,
-            height: parseInt(image.height_z),
-            width: parseInt(image.width_z),
-          })),
-        })
-        // }
-      })
+          images: result.photos.photo.map(this.processFickrImagesOrVideo),
+        });
+      });
   }
+  // https://code.flickr.net/2008/05/01/videos-in-the-flickr-api/
+  processFickrImagesOrVideo = (entry) => {
+    return {
+      media: entry.media,
+      id: entry.id,
+      src: entry.url_z,
+      hires: entry.url_l,
+      height: parseInt(entry.height_z),
+      width: parseInt(entry.width_z),
+    };
+  };
 
   openNav = () => {
-    console.log("open contact dropdown")
-    document.getElementById("myNav").style.display = "block"
-  }
+    console.log("open contact dropdown");
+    document.getElementById("myNav").style.display = "block";
+  };
 
   closeNav = () => {
-    console.log("CLOSE contact dropdown")
-    document.getElementById("myNav").style.display = "none"
-  }
+    console.log("CLOSE contact dropdown");
+    document.getElementById("myNav").style.display = "none";
+  };
 
-  openLightbox = (event, obj) => {
-    this.setState({
-      currentImage: obj.index,
-      lightboxIsOpen: true,
-    })
-  }
+  openLightbox = (event, entry) => {
+    if (entry.photo.media === "video") {
+      console.log(`id ${entry.id} is a video. Fetching further data`);
+      const url =
+        "https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&" +
+        "&api_key=52f7e77ccc225a2c6cda920bb6173fb5" +
+        "&photo_id=" +
+        entry.photo.id +
+        "&format=json" +
+        "&nojsoncallback=1";
+      fetch(url)
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result);
+          result.sizes.size.map((video) => {
+            if (video.label === "Video Player") {
+              window.open(video.url, '_blank');
+            }
+          });
+        });
+    } else {
+      this.setState({
+        currentImage: entry.index,
+        lightboxIsOpen: true,
+      });
+    }
+  };
   closeLightbox = () => {
     this.setState({
       currentImage: 0,
       lightboxIsOpen: false,
-    })
-  }
+    });
+  };
   gotoPrevious = () => {
     this.setState({
       currentImage: this.state.currentImage - 1,
-    })
-  }
+    });
+  };
   gotoNext = () => {
     this.setState({
       currentImage: this.state.currentImage + 1,
-    })
-  }
+    });
+  };
   // This can be used to close the menu, e.g. when a user clicks a menu item
   closeMenu = () => {
-    console.log("closing the menu")
-    this.setState({ menuOpen: false })
-  }
+    console.log("closing the menu");
+    this.setState({ menuOpen: false });
+  };
 
   handleStateChange(state) {
-    this.setState({ menuOpen: state.isOpen })
+    this.setState({ menuOpen: state.isOpen });
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.listenScrollEvent)
+    window.addEventListener("scroll", this.listenScrollEvent);
     document
       .getElementsByClassName("bm-menu")[0]
       .addEventListener("click", function(event) {
-        console.log("menu clicked!")
+        console.log("menu clicked!");
         // this.closeNav();
-      })
+      });
   }
   render() {
     return (
@@ -193,10 +219,11 @@ class App extends Component {
           {this._isMounted && (
             <Gallery
               photos={this.state.images}
-              direction={"column"}
+              // direction={"column"}
               onClick={this.openLightbox}
             />
           )}
+
           {this.state.lightboxIsOpen && (
             <Lightbox
               mainSrc={
@@ -233,9 +260,9 @@ class App extends Component {
           )}
         </div>
       </Container>
-    )
+    );
   }
   //END
 }
 
-export default App
+export default App;
