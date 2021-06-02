@@ -2,6 +2,10 @@
 
 Personal website for Will Tubby, Visual Designer
 
+## HOSTED
+
+http://www.tubbycreative.com/
+
 
 ## Deployment
 
