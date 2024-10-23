@@ -22,3 +22,8 @@ export const TitleContainer = styled.div`
 export const TitleImage = styled.img`
   width: 80%;
 `;
+
+export const WillText = styled.div`
+  font-size: 1rem;
+  color: #E94375;
+`;

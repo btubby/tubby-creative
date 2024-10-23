@@ -1,3 +1,7 @@
+.is_video {
+  border: 1px solid tomato;
+}
+​
 /* The Overlay (background) */
 .overlay {
   /* Height & width depends on how you want to reveal the overlay (see JS below) */
@@ -108,9 +112,12 @@
   top: 1.3rem;
 }
 
+.pagewrap {
+  height: 100%
+}
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #000000;
+  background: #E94375;
 }
 
 /* This positions the cross centrally in the button */
@@ -141,6 +148,10 @@
 /* Wrapper for item list */
 .bm-item-list {
   color: #b8b7ad;
+  display: flex;
+    /* width: 46px; */
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Styling of overlay */
